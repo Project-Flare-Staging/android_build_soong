@@ -116,11 +116,15 @@ func (lto *lto) flags(ctx ModuleContext, flags Flags) Flags {
 			ltoCFlags = []string{"-flto=thin"}
 		}
 
+                var ltoCOnlyFlags []string
 		var ltoLdFlags []string
 
 		// Do not perform costly LTO optimizations for Eng builds.
 		if Bool(lto.Properties.Lto_O0) || ctx.optimizeForSize() || ctx.Config().Eng() {
 			ltoLdFlags = append(ltoLdFlags, "-Wl,--lto-O0")
+		} else {
+			ltoLdFlags = append(ltoLdFlags,"-Wl,--lto-O3")
+			ltoCOnlyFlags = append(ltoCOnlyFlags, "-O3")
 		}
 
 		if Bool(lto.Properties.Whole_program_vtables) {
@@ -168,6 +172,7 @@ func (lto *lto) flags(ctx ModuleContext, flags Flags) Flags {
 		flags.Local.AsFlags = append(flags.Local.AsFlags, ltoCFlags...)
 		flags.Local.LdFlags = append(flags.Local.LdFlags, ltoCFlags...)
 		flags.Local.LdFlags = append(flags.Local.LdFlags, ltoLdFlags...)
+		flags.Local.CFlags = append(flags.Local.CFlags, ltoCOnlyFlags...)
 	}
 	return flags
 }
