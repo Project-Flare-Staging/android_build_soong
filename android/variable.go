@@ -236,6 +236,12 @@ type ProductVariables struct {
 	BuildThumbprintFile  *string `json:",omitempty"`
 	DisplayBuildNumber   *bool   `json:",omitempty"`
 
+	FlareDevice         *string `json:",omitempty"`
+	FlareDisplayVersion *string `json:",omitempty"`
+	FlareMajorVersion   *string `json:",omitempty"`
+	FlareMinorVersion   *string `json:",omitempty"`
+	FlareBuildVariant   *string `json:",omitempty"`
+
 	Platform_display_version_name          *string  `json:",omitempty"`
 	Platform_version_name                  *string  `json:",omitempty"`
 	Platform_sdk_version                   *int     `json:",omitempty"`
