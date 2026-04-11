@@ -1030,6 +1030,22 @@ func (c *config) DisplayBuildNumber() bool {
 	return Bool(c.productVariables.DisplayBuildNumber)
 }
 
+func (c *config) FlareDisplayVersion() string {
+	return fmt.Sprintf("%q", String(c.productVariables.FlareDisplayVersion))
+}
+
+func (c *config) FlareMajorVersion() string {
+	return String(c.productVariables.FlareMajorVersion)
+}
+
+func (c *config) FlareMinorVersion() string {
+	return String(c.productVariables.FlareMinorVersion)
+}
+
+func (c *config) FlareBuildVariant() string {
+	return String(c.productVariables.FlareBuildVariant)
+}
+
 // BuildFingerprintFile returns the path to a text file containing metadata
 // representing the current build's fingerprint.
 //

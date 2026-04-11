@@ -126,6 +126,8 @@ def parse_args():
   if config["BuildNumber"].startswith("eng."):
     config["BuildNumber"] = config["DateUtc"]
 
+  config["FlareDevice"] = config["DeviceName"]
+
   override_config(config)
 
   append_additional_system_props(args)
@@ -274,6 +276,12 @@ def generate_build_info(args):
   print(f"ro.build.description?={config['BuildDesc']}")
   if "BuildThumbprint" in config:
     print(f"ro.build.thumbprint={config['BuildThumbprint']}")
+
+  print(f"ro.flare.device={config['FlareDevice']}")
+  print(f"ro.flare.version={config['FlareDisplayVersion']}")
+  print(f"ro.flare.version.major={config['FlareMajorVersion']}")
+  print(f"ro.flare.version.minor={config['FlareMinorVersion']}")
+  print(f"ro.flare.build.variant={config['FlareBuildVariant']}")
 
   print(f"# end build properties")
 
